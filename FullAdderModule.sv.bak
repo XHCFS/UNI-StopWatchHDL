@@ -1,0 +1,92 @@
+
+module FullAdderModule(
+
+input add,sub,
+input [15:0]in_final,
+output [15:0]out_final, //output 
+output reset
+);
+
+// Flow :
+/*
+Buttons are pressed-->signal1 module-->signal 01/11-->Clock opens for registors-->values are passed to adding digit 1:
+*/
+//defs 
+wire [3:0]q1;
+wire [3:0]q2;
+
+
+//Temps
+wire [3:0]q1T;
+wire [3:0]q2T;
+wire [3:0]qn1, qn1r, qn2, qn2r;
+
+//signal 1
+wire [1:0]signal_1;    
+wire enableR1;
+or(enableR1,add,sub);
+Signal1 signal1(add,sub,signal_1);  
+
+//signal 2
+wire [1:0]signal_2;
+wire increment,decrement,enableR2;
+Signal2 signal2(increment,decrement,signal_1,enableR2,signal_2);
+
+//Filling registors//
+registor4b r1(enableR1,in_final[11:8],q1T);  
+registor4b r2(enableR2,in_final[15:12],q2T);
+
+//adding modules//
+
+// 2min adder
+digit1adder min1(signal_1[0],signal_1[1],in_final[11:8],qn1,qn1r,increment,decrement); 
+
+//1 min adder
+digit2adder min2(signal_2[0],signal_2[1],in_final[15:12],qn2,qn2r,reset);
+
+// Gives output for preset and set signals that feed the loader into the flipflops
+//16 bit output 
+if (add || sub)begin
+ or(out_final[0],in_final[0]);
+ or(out_final[1],in_final[1]);
+ or(out_final[2],in_final[2]);
+ or(out_final[3],in_final[3]);
+ or(out_final[4],in_final[4]);
+ or(out_final[5],in_final[5]);
+ or(out_final[6],in_final[6]);
+ or(out_final[7],in_final[7]);
+
+//Intialization:
+
+ or(out_final[8],qn1[0]);
+ or(out_final[9],qn1[1]);
+ or(out_final[10],qn1[2]);
+ or(out_final[11],qn1[3]);
+ or(out_final[12],qn2[0]);
+ or(out_final[13],qn2[1]);
+ or(out_final[14],qn2[2]);
+ or(out_final[15],qn2[3]);
+end else begin
+ or(out_final[0],1'b0);
+ or(out_final[1],1'b0);
+ or(out_final[2],1'b0);
+ or(out_final[3],1'b0);
+ or(out_final[4],1'b0);
+ or(out_final[5],1'b0);
+ or(out_final[6],1'b0);
+ or(out_final[7],1'b0);
+
+//Intialization:
+
+ or(out_final[8], 1'b0);
+ or(out_final[9], 1'b0);
+ or(out_final[10],1'b0);
+ or(out_final[11],1'b0);
+ or(out_final[12],1'b0);
+ or(out_final[13],1'b0);
+ or(out_final[14],1'b0);
+ or(out_final[15],1'b0);
+end
+
+
+endmodule

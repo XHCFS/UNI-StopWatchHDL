@@ -1,0 +1,13 @@
+module Dlatch (  input d,           // 1-bit input pin for data  
+                  input en,          // 1-bit input pin for enabling the latch  
+                  input rstn,        // 1-bit input pin for active-low reset  
+                  output reg q);     // 1-bit output pin for data output  
+  
+  
+   always @ (en or rstn or d)  
+      if (!rstn)  
+         q <= 0;  
+      else  
+         if (en)  
+            q <= d;  
+endmodule  

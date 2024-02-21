@@ -1,0 +1,24 @@
+module Latch16b(input enable,input [15:0]in,output [15:0]out);
+
+wire high;
+assign high=1;
+Dlatch DL0(in[0],high,enable,out[0]);
+Dlatch DL1(in[1],high,enable,out[1]);
+Dlatch DL2(in[2],high,enable,out[2]);
+Dlatch DL3(in[3],high,enable,out[3]);
+Dlatch DL4(in[4],high,enable,out[4]);
+Dlatch DL5(in[5],high,enable,out[5]);
+Dlatch DL6(in[6],high,enable,out[6]);
+Dlatch DL7(in[7],high,enable,out[7]);
+Dlatch DL8(in[8],high,enable,out[8]);
+Dlatch DL9(in[9],high,enable,out[9]);
+Dlatch DL10(in[10],high,enable,out[10]);
+Dlatch DL11(in[11],high,enable,out[11]);
+Dlatch DL12(in[12],high,enable,out[12]);
+Dlatch DL13(in[13],high,enable,out[13]);
+Dlatch DL14(in[14],high,enable,out[14]);
+Dlatch DL15(in[15],high,enable,out[15]);
+
+
+
+endmodule

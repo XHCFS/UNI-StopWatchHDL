@@ -1,0 +1,20 @@
+module comparator (input [16:1] a, b, output c);
+wire [16:1]term;
+	xnor(term[1],a[1],b[1]);
+	xnor(term[2],a[2],b[2]);
+	xnor(term[3],a[3],b[3]);
+	xnor(term[4],a[4],b[4]);
+	xnor(term[5],a[5],b[5]);
+	xnor(term[6],a[6],b[6]);
+	xnor(term[7],a[7],b[7]);
+	xnor(term[8],a[8],b[8]);
+	xnor(term[9],a[9],b[9]);
+	xnor(term[10],a[ 10 ],b[ 10 ]);
+	xnor(term[11],a[ 11 ],b[ 11 ]);
+	xnor(term[12],a[ 12 ],b[ 12 ]);
+	xnor(term[13],a[ 13 ],b[ 13 ]);
+	xnor(term[14],a[ 14 ],b[ 14 ]);
+	xnor(term[15],a[ 15 ],b[ 15 ]);
+	xnor(term[16],a[ 16 ],b[ 16 ]);
+	and(c,term[1],term[2],term[3],term[4],term[5],term[6],term[7],term[8],term[9],term[10],term[11],term[12],term[13],term[14],term[15],term[16]);
+endmodule

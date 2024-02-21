@@ -1,0 +1,17 @@
+module bcd_loader (input reset,
+                  input reverse,
+                  output reg [15:0] bcd_value);
+
+  // Constants for 1020 and 4030 in BCD
+  parameter BCD_1020 = 16'b0001000000100001;
+  parameter BCD_4030 = 16'b0100000001110000;
+
+  // Reset and load value based on reverse signal
+  always @(posedge reset) begin
+    if (reverse) begin
+      bcd_value <= BCD_1020;
+    end else begin
+      bcd_value <= BCD_4030;
+    end
+  end
+endmodule

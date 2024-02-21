@@ -1,0 +1,11 @@
+module bool_equation_reset_values(input reset, reverse, add,subtract, signal,output index_reset);
+    wire term1,term2,reset_i,reverse_i,add_i,signal_i,subtract_i;
+    not(reverse_i,reverse);
+    not(add_i,add);
+    not(subtract_i,subtract);
+    not(reset_i,reset);
+    not(signal_i,signal);
+    and(signal,add,reverse_i,reset_i,subtract_i);
+    and(term2,reset,signal_i,reverse,add_i,subtract_i);
+    or(index_reset,term1,term2);
+endmodule
